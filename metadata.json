@@ -3,7 +3,7 @@
   "version": "0.1.8",
   "author": "jonhallettuob",
   "summary": "A module to install the eXist database as a service",
-  "license": "Apache-2.0",
+  "license": "BSD-3-Clause",
   "source": "https://github.com/ilrt/existdb",
   "project_page": "https://github.com/ilrt/existdb",
   "issues_url": "https://github.com/ilrt/existdb",
