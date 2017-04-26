@@ -1,0 +1,21 @@
+{
+  "name": "jonhallettuob-existdb",
+  "version": "0.1.8",
+  "author": "jonhallettuob",
+  "summary": "A module to install the eXist database as a service",
+  "license": "Apache-2.0",
+  "source": "https://github.com/ilrt/existdb",
+  "project_page": "https://github.com/ilrt/existdb",
+  "issues_url": "https://github.com/ilrt/existdb",
+  "dependencies": [
+    {"name":"puppetlabs-java","version_requirement":">= 1.6.0"}
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem":"CentOS",
+      "operatingsystemrelease":["7"]
+    }
+  ],
+  "data_provider": null
+}
+
