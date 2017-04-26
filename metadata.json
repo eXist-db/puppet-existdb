@@ -4,9 +4,9 @@
   "author": "jonhallettuob",
   "summary": "A module to install the eXist database as a service",
   "license": "BSD-3-Clause",
-  "source": "https://github.com/ilrt/existdb",
-  "project_page": "https://github.com/ilrt/existdb",
-  "issues_url": "https://github.com/ilrt/existdb",
+  "source": "https://github.com/eXist-db/puppet-existdb",
+  "project_page": "https://github.com/eXist-db/puppet-existdb",
+  "issues_url": "https://github.com/eXist-db/puppet-existdb",
   "dependencies": [
     {"name":"puppetlabs-java","version_requirement":">= 1.6.0"}
   ],
