@@ -21,7 +21,7 @@ To use this module, add these declarations to your Puppetfile:
 
 ```
 mod 'puppetlabs-java', '1.7.0'
-mod 'jonhallettuob-existdb', '0.1.8'
+mod 'jonhallettuob-existdb', '0.1.9'
 ```
 
 To install eXistdb and start it as a service with default parameters:

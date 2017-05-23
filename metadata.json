@@ -1,6 +1,6 @@
 {
   "name": "jonhallettuob-existdb",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "author": "jonhallettuob",
   "summary": "A module to install the eXist database as a service",
   "license": "BSD-3-Clause",
