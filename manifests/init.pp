@@ -64,6 +64,19 @@ class existdb (
     ],
   }
 
+  exec { 'sign eXist jar files':
+    cwd         => $exist_home,
+    command     => "${exist_home}/build.sh -f build/scripts/jarsigner.xml -propertyfile build.properties",
+    environment => [
+      "JAVA_HOME=${java_home}",
+    ],
+    timeout     => 0,
+    user        => $exist_user,
+    group       => $exist_group,
+    refreshonly => true,
+    subscribe   => Exec['build eXist'],
+  }
+
   augeas { 'eXist conf.xml':
     lens    => 'Xml.lns',
     incl    => "${exist_home}/conf.xml",
@@ -105,7 +118,7 @@ class existdb (
       'set exist/xquery/builtin-modules/module[#attribute/uri = "http://exist-db.org/xquery/xslfo"]/parameter/#attribute/value org.exist.xquery.modules.xslfo.ApacheFopProcessorAdapter',
     ],
     require => [
-      Exec['build eXist'],
+      Exec['sign eXist jar files'],
       File[$exist_data],
     ]
   }
@@ -121,7 +134,7 @@ class existdb (
     timeout     => 0,
     user        => 'root',
     refreshonly => true,
-    subscribe   => Exec['build eXist'],
+    subscribe   => Exec['sign eXist jar files'],
   }
 
   service { 'eXist-db':
