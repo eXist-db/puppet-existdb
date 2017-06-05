@@ -58,6 +58,7 @@ classes:
   - existdb::reverseproxy
 
 existdb::reverseproxy::server_name: 'server.example.com'
+```
 
 ## Usage
 
