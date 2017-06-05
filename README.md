@@ -95,6 +95,8 @@ class existdb::reverseproxy (
 }
 ```
 
+Certificates for the reverse proxy are assumed to be installed in `/etc/pki/tls/certs`.
+
 ## Limitations
 
 The module was developed on CentOS 7 using Puppet 4 and hasn't been tested on any other systems.
