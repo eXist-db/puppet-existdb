@@ -95,7 +95,7 @@ class existdb::reverseproxy (
 }
 ```
 
-The SSL certificate and key for the reverse proxy are assumed to be installed in `/etc/pki/tls/certs`.
+The SSL certificate and key for the reverse proxy are assumed to be installed in `/etc/pki/tls`.
 
 ## Limitations
 
