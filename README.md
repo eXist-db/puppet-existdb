@@ -21,7 +21,7 @@ To use this module, add these declarations to your Puppetfile:
 
 ```
 mod 'puppetlabs-java', '1.7.0'
-mod 'jonhallettuob-existdb', '0.2.0'
+mod 'jonhallettuob-existdb', '0.2.1'
 ```
 
 To install eXistdb and start it as a service with default parameters:
@@ -43,7 +43,8 @@ classes:
 
 java::package: 'java-1.8.0-openjdk-devel'
 ```
-To configure a reverse proxy to make eXistdb appear on port 443:
+
+To configure a reverse proxy to make eXistdb appear on port 443, add `mod 'puppet-nginx', '0.6.0'` to your Puppetfile and then:
 
 ```
 class existdb::reverseproxy {
