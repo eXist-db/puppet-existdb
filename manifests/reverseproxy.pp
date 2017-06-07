@@ -27,7 +27,7 @@ class existdb::reverseproxy (
     changes => [
       'set Configure/New[#attribute/id = "httpdConfig"]/#attribute/class org.eclipse.jetty.server.HttpConfiguration',
       'clear Configure/New[#attribute/id = "httpdConfig"]/Arg/New[#attribute/class = "org.eclipse.jetty.server.ForwardedRequestCustomizer"',
-    }
+    ],
     require => Class['existdb'],
     notify  => Service['eXist-db'],
 }
