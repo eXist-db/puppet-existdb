@@ -28,7 +28,8 @@ class existdb::reverseproxy (
     changes => [
       'set Configure/New[#attribute/id = "httpConfig"]/#attribute/id httpConfig',
       'set Configure/New[#attribute/id = "httpConfig"]/#attribute/class org.eclipse.jetty.server.HttpConfiguration',
-      'set Configure/New[#attribute/id = "httpConfig"]/Arg/New/#attribute/class org.eclipse.jetty.server.ForwardedRequestCustomizer',
+      'set Configure/New[#attribute/id = "httpConfig"]/Call/#attribute/name addCustomizer',
+      'set Configure/New[#attribute/id = "httpConfig"]/Call/Arg/New/#attribute/class org.eclipse.jetty.server.ForwardedRequestCustomizer',
     ],
     require => Vcsrepo[$exist_home],
     notify  => Service['eXist-db'],
