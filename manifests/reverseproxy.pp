@@ -27,7 +27,7 @@ class existdb::reverseproxy (
     context => "/files${exist_home}/tools/jetty/etc/jetty-http.xml/",
     changes => [
       'ins New before Configure/Call[#attribute/name = "addConnector"]',
-      'set Configure/New[first()]/#attribute/id httpConfig',
+      'set Configure/New/#attribute/id httpConfig',
       'set Configure/New[#attribute/id = "httpConfig"]/#attribute/class org.eclipse.jetty.server.HttpConfiguration',
       'set Configure/New[#attribute/id = "httpConfig"]/Call/#attribute/name addCustomizer',
       'set Configure/New[#attribute/id = "httpConfig"]/Call/Arg/New/#attribute/class org.eclipse.jetty.server.ForwardedRequestCustomizer',
