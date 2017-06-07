@@ -1,6 +1,7 @@
 class existdb::reverseproxy (
   $server_name,
   $server_cert_name = $server_name,
+  $exist_home = '/usr/local/existdb',
 ) {
   include nginx
   nginx::resource::server { $server_name:
@@ -28,7 +29,7 @@ class existdb::reverseproxy (
       'set Configure/New[#attribute/id = "httpdConfig"]/#attribute/class org.eclipse.jetty.server.HttpConfiguration',
       'clear Configure/New[#attribute/id = "httpdConfig"]/Arg/New[#attribute/class = "org.eclipse.jetty.server.ForwardedRequestCustomizer"]',
     ],
-    require => Class['existdb'],
+    require => Vcsrepo[$exist_home],
     notify  => Service['eXist-db'],
   }
 }
