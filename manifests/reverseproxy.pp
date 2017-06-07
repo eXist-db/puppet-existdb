@@ -19,4 +19,15 @@ class existdb::reverseproxy (
     ],
     require          => Class['existdb'],
   }
+
+  augeas { 'eXist jetty-http.xml':
+    lens    => 'Xml.lns',
+    incl    => "${exist_home}/tools/jetty/etc/jetty-http.xml",
+    context => "/files${exist_home}/tools/jetty/etc/jetty-http.xml/",
+    changes => [
+      'set Configure/New[#attribute/id = "httpdConfig"]/#attribute/class org.eclipse.jetty.server.HttpConfiguration',
+      'clear Configure/New[#attribute/id = "httpdConfig"]/Arg/New[#attribute/class = "org.eclipse.jetty.server.ForwardedRequestCustomizer"]',
+      require => Class['existdb'],
+      notify  => Service['eXist-db'],
+    }
 }
