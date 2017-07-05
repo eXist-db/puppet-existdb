@@ -25,7 +25,7 @@ define existdb::reverseproxy::server (
   $server_name = $title,
   $server_cert_name = $server_name,
   $ssl_cert = "/etc/pki/tls/certs/${server_cert_name}.crt", 
-  $ss_key = "/etc/pki/tls/private/${server_cert_name}.key",
+  $ssl_key = "/etc/pki/tls/private/${server_cert_name}.key",
   $uri_path = '',
   $proxy_redirect = 'default',
 ) {
