@@ -24,6 +24,8 @@ class existdb::reverseproxy (
 define existdb::reverseproxy::server (
   $server_name = $title,
   $server_cert_name = $server_name,
+  $ssl_cert = "/etc/pki/tls/certs/${server_cert_name}.crt", 
+  $ss_key = "/etc/pki/tls/private/${server_cert_name}.key",
   $uri_path = '',
   $proxy_redirect = 'default',
 ) {
@@ -33,8 +35,8 @@ define existdb::reverseproxy::server (
     proxy_redirect   => $proxy_redirect,
     ssl              => true,
     ssl_redirect     => true,
-    ssl_cert         => "/etc/pki/tls/certs/${server_cert_name}.crt",
-    ssl_key          => "/etc/pki/tls/private/${server_cert_name}.key",
+    ssl_cert         => $ssl_cert,
+    ssl_key          => $ssl_key,
     proxy_set_header => [
       'Host $host',
       'X-Real-IP $remote_addr',
