@@ -22,7 +22,7 @@ class existdb::reverseproxy (
 }
 
 define existdb::reverseproxy::server (
-  $server_name,
+  $server_name = $title,
   $server_cert_name = $server_name,
   $uri_path = '',
 ) {
