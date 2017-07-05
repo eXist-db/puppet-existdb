@@ -93,6 +93,8 @@ class existdb::reverseproxy (
 class existdb::reverseproxy::server {
   $server_name,
   $server_cert_name = $server_name,
+  $ssl_cert = "/etc/pki/tls/certs/${server_cert_name}.crt",
+  $ssl_key = "/etc/pki/tls/private/${server_cert_name}.key",
   $uri_path = '',
   $proxy_redirect = 'default',
 ) {
