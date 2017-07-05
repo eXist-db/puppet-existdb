@@ -94,6 +94,7 @@ class existdb::reverseproxy::server {
   $server_name,
   $server_cert_name = $server_name,
   $uri_path = '',
+  $proxy_redirect = 'default',
 ) {
  ...
 }
