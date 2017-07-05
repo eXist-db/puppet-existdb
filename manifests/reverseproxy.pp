@@ -2,7 +2,7 @@ class existdb::reverseproxy (
   $servers,
   $exist_home = '/usr/local/existdb',
 ) {
-  create_resource(existdb::reverseproxy::server, $servers)
+  create_resources(existdb::reverseproxy::server, $servers)
 
   augeas { 'eXist jetty-http.xml':
     lens    => 'Xml.lns',
