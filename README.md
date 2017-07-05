@@ -44,21 +44,16 @@ classes:
 java::package: 'java-1.8.0-openjdk-devel'
 ```
 
-To configure a reverse proxy to make eXistdb appear on port 443, add `mod 'puppet-nginx', '0.6.0'` to your Puppetfile and then:
-
-```
-class existdb::reverseproxy {
-  server_name => 'server.example.com',
-}
-```
-
-Or in Hiera:
+To configure a reverse proxy to make eXistdb appear on port 443, add `mod 'puppet-nginx', '0.6.0'` to your Puppetfile and then in Hiera:
 
 ```
 classes:
   - existdb::reverseproxy
 
-existdb::reverseproxy::server_name: 'server.example.com'
+existdb::reverseproxy::servers:
+  'server.example.com':
+    server_cert_name: 'server.example.com'
+    uri_path: '/app'
 ```
 
 ## Usage
@@ -89,9 +84,16 @@ class existdb (
 }
 
 class existdb::reverseproxy (
+  $servers,
+  $exist_home = '/usr/local/existdb',
+) {
+ ...
+}
+
+class existdb::reverseproxy::server {
   $server_name,
   $server_cert_name = $server_name,
-  $exist_home = '/usr/local/existdb',
+  $uri_path = '',
 ) {
  ...
 }

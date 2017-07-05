@@ -1,25 +1,8 @@
 class existdb::reverseproxy (
-  $server_name,
-  $server_cert_name = $server_name,
+  $servers,
   $exist_home = '/usr/local/existdb',
 ) {
-  include nginx
-  nginx::resource::server { $server_name:
-    proxy            => 'http://127.0.0.1:8080',
-    ssl              => true,
-    ssl_redirect     => true,
-    ssl_cert         => "/etc/pki/tls/certs/${server_cert_name}.crt",
-    ssl_key          => "/etc/pki/tls/private/${server_cert_name}.key",
-    proxy_set_header => [
-      'Host $host',
-      'X-Real-IP $remote_addr',
-      'X-Forwarded-For $proxy_add_x_forwarded_for',
-      'X-Forwarded-Host $host',
-      'X-Forwarded-Proto $scheme',
-      'Proxy ""',
-    ],
-    require          => Class['existdb'],
-  }
+  create_resource(existdb::reverseproxy::server, $servers)
 
   augeas { 'eXist jetty-http.xml':
     lens    => 'Xml.lns',
@@ -35,5 +18,29 @@ class existdb::reverseproxy (
     onlyif  => 'match Configure/New[#attribute/id = "httpConfig"] size == 0',
     require => Vcsrepo[$exist_home],
     notify  => Service['eXist-db'],
+  }
+}
+
+class existdb::reverseproxy::server (
+  $server_name,
+  $server_cert_name = $server_name,
+  $uri_path = '',
+) {
+  include nginx
+  nginx::resource::server { $server_name:
+    proxy            => "http://127.0.0.1:8080${uri_path}",
+    ssl              => true,
+    ssl_redirect     => true,
+    ssl_cert         => "/etc/pki/tls/certs/${server_cert_name}.crt",
+    ssl_key          => "/etc/pki/tls/private/${server_cert_name}.key",
+    proxy_set_header => [
+      'Host $host',
+      'X-Real-IP $remote_addr',
+      'X-Forwarded-For $proxy_add_x_forwarded_for',
+      'X-Forwarded-Host $host',
+      'X-Forwarded-Proto $scheme',
+      'Proxy ""',
+    ],
+    require          => Class['existdb'],
   }
 }
