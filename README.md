@@ -21,7 +21,7 @@ To use this module, add these declarations to your Puppetfile:
 
 ```
 mod 'puppetlabs-java', '1.7.0'
-mod 'jonhallettuob-existdb', '0.2.2'
+mod 'jonhallettuob-existdb', '0.2.3'
 ```
 
 To install eXistdb and start it as a service with default parameters:
@@ -53,7 +53,7 @@ classes:
 existdb::reverseproxy::servers:
   'server.example.com':
     server_cert_name: 'server.example.com'
-    uri_path: '/app'
+    uri_path: '/exist/apps/example.com'
 ```
 
 ## Usage
