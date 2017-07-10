@@ -20,7 +20,7 @@ This module installs the eXist database software and starts it as a service.
 To use this module, add these declarations to your Puppetfile:
 
 ```
-mod 'puppetlabs-java', '1.7.0'
+mod 'puppetlabs-java', '2.1.0'
 mod 'jonhallettuob-existdb', '0.2.4'
 ```
 
