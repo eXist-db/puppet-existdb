@@ -4,9 +4,14 @@ define existdb::reverseproxy::server (
   $ssl_cert = "/etc/pki/tls/certs/${server_cert_name}.crt",
   $ssl_key = "/etc/pki/tls/private/${server_cert_name}.key",
   $uri_path = '',
-  $proxy_redirect = 'default',
 ) {
   include nginx
+
+  $proxy_redirect = 'default'
+  if $uri_path {
+    $proxy_redirect = "https://${server_name}${uri_path} /"
+  }
+
   nginx::resource::server { $server_name:
     proxy            => "http://127.0.0.1:8080${uri_path}",
     proxy_redirect   => $proxy_redirect,
