@@ -7,7 +7,7 @@ define existdb::reverseproxy::server (
 ) {
   include nginx
 
-  if $uri_path {
+  if $uri_path != '' {
     $proxy_redirect = "https://${server_name}${uri_path} /"
   }
   else {
