@@ -5,6 +5,7 @@ define existdb::reverseproxy::server (
   $ssl_key = "/etc/pki/tls/private/${server_cert_name}.key",
   $uri_path = '',
   $location_cfg_append = undef,
+  $raw_append = undef,
 ) {
   include nginx
 
@@ -32,5 +33,6 @@ define existdb::reverseproxy::server (
     ],
     require             => Class['existdb'],
     location_cfg_append => $location_cfg_append,
+    raw_append => $raw_append,
   }
 }
