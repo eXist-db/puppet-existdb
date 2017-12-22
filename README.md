@@ -44,7 +44,7 @@ classes:
 java::package: 'java-1.8.0-openjdk-devel'
 ```
 
-To configure a reverse proxy to make eXistdb appear on port 443, add `mod 'puppet-nginx', '0.6.0'` to your Puppetfile and then in Hiera:
+To configure a reverse proxy to make eXistdb appear on port 443, add `mod 'puppet-nginx', '0.9.0'` to your Puppetfile and then in Hiera:
 
 ```
 classes:
