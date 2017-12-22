@@ -75,7 +75,7 @@ class existdb (
   $exist_data                  = '/var/lib/existdb',
   $exist_cache_size            = '128M',
   $exist_collection_cache_size = '24M',
-  $exist_revision              = 'eXist-3.5.0',
+  $exist_revision              = 'eXist-3.6.0',
   $java_home                   = '/usr/lib/jvm/jre',
   $exist_user                  = 'existdb',
   $exist_group                 = 'existdb',
@@ -97,6 +97,7 @@ class existdb::reverseproxy::server {
   $ssl_key = "/etc/pki/tls/private/${server_cert_name}.key",
   $uri_path = '',
   $proxy_redirect = 'default',
+  $location_cfg_append = undef,
 ) {
  ...
 }
