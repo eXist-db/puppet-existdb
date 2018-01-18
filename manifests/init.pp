@@ -120,20 +120,7 @@ class existdb (
     require => [
       Exec['sign eXist jar files'],
       File[$exist_data],
-    ],
-  }
-
-  augeas { 'eXist daemon wrapper.conf':
-    lens    => 'Properties.lns',
-    incl    => "${exist_home}/tools/yajsw/conf/wrapper.conf",
-    context => "/files${exist_home}/tools/yajsw/conf/wrapper.conf/",
-    changes => [
-      'set wrapper.java.additional.6 -Dcom.sun.management.jmxremote',
-      'set wrapper.java.additional.7 -Dcom.sun.management.jmxremote.port=1099',
-      'set wrapper.java.additional.8 -Dcom.sun.management.jmxremote.authenticate=false',
-      'set wrapper.java.additional.9 -Dcom.sun.management.jmxremote.ssl=false',
-    ],
-    require => File[$exist_data],
+    ]
   }
 
   exec { 'install eXist':
@@ -147,10 +134,7 @@ class existdb (
     timeout     => 0,
     user        => 'root',
     refreshonly => true,
-    subscribe   => [
-      Exec['sign eXist jar files'],
-      Augeas['eXist daemon wrapper.conf'],
-    ],
+    subscribe   => Exec['sign eXist jar files'],
   }
 
   service { 'eXist-db':
@@ -159,6 +143,6 @@ class existdb (
     require   => [
       Exec['build eXist'],
       Augeas['eXist conf.xml'],
-    ],
+    ]
   }
 }
