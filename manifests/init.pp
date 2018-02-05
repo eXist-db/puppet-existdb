@@ -6,7 +6,6 @@ class existdb (
   $exist_collection_cache_size = '24M',
   $exist_revision              = 'eXist-3.6.0',
   $java_home                   = '/usr/lib/jvm/jre',
-  $java_package                = 'java-1.8.0-openjdk-devel',
   $exist_user                  = 'existdb',
   $exist_group                 = 'existdb',
 ) {
@@ -142,7 +141,6 @@ class existdb (
     ensure    => running,
     subscribe => [
       Exec['install eXist'],
-      Package[$java_package],
     ],
     require   => [
       Exec['build eXist'],
