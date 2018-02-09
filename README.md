@@ -90,7 +90,7 @@ class existdb::reverseproxy (
  ...
 }
 
-class existdb::reverseproxy::server {
+define existdb::reverseproxy::server {
   $server_name,
   $server_cert_name = $server_name,
   $ssl_cert = "/etc/pki/tls/certs/${server_cert_name}.crt",
