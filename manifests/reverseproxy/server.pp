@@ -18,13 +18,13 @@ define existdb::reverseproxy::server (
   }
 
   nginx::resource::server { $server_name:
-    proxy               => "http://127.0.0.1:8080${uri_path}",
-    proxy_redirect      => $proxy_redirect,
-    ssl                 => true,
-    ssl_redirect        => true,
-    ssl_cert            => $ssl_cert,
-    ssl_key             => $ssl_key,
-    proxy_set_header    => [
+    proxy                      => "http://127.0.0.1:8080${uri_path}",
+    proxy_redirect             => $proxy_redirect,
+    ssl                        => true,
+    ssl_redirect               => true,
+    ssl_cert                   => $ssl_cert,
+    ssl_key                    => $ssl_key,
+    proxy_set_header           => [
       'Host $host',
       'X-Real-IP $remote_addr',
       'X-Forwarded-For $proxy_add_x_forwarded_for',
@@ -32,9 +32,9 @@ define existdb::reverseproxy::server (
       'X-Forwarded-Proto $scheme',
       'Proxy ""',
     ],
-    require             => Class['existdb'],
-    location_cfg_append => $location_cfg_append,
+    require                    => Class['existdb'],
+    location_cfg_append        => $location_cfg_append,
     location_custom_cfg_append => $location_custom_cfg_append,
-    raw_append => $raw_append,
+    raw_append                 => $raw_append,
   }
 }
