@@ -1,3 +1,4 @@
+# configure reverse proxies for eXist-db servers
 class existdb::reverseproxy (
   $servers,
   $exist_home = '/usr/local/existdb',

@@ -1,3 +1,4 @@
+# configure a reverse proxy for an eXist-db server
 define existdb::reverseproxy::server (
   $server_name = $title,
   $server_cert_name = $server_name,
