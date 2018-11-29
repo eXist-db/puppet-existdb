@@ -8,7 +8,7 @@
   "project_page": "https://github.com/eXist-db/puppet-existdb",
   "issues_url": "https://github.com/eXist-db/puppet-existdb",
   "requirements": [
-    {"name":"pe","version_requirement":">= 4.10.0"}
+    {"name":"pe","version_requirement":">= 4.7.0 < 7.0.0"}
   ],
   "dependencies": [
     {"name":"puppetlabs-java","version_requirement":">= 1.6.0 < 3.0.0"},
