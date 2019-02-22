@@ -130,6 +130,8 @@ class existdb (
       "JAVA_HOME=${java_home}",
       "EXIST_HOME=${exist_home}",
       "RUN_AS_USER=${exist_user}",
+      'WRAPPER_UNATTENDED=1',
+      'WRAPPER_USE_SYSTEMD=1',
     ],
     timeout     => 0,
     user        => 'root',
