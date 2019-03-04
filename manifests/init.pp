@@ -123,26 +123,22 @@ class existdb (
     ]
   }
 
-  exec { 'install eXist':
-    cwd         => $exist_home,
-    command     => "/bin/yes | ${exist_home}/tools/yajsw/bin/installDaemon.sh",
-    environment => [
-      "JAVA_HOME=${java_home}",
-      "EXIST_HOME=${exist_home}",
-      "RUN_AS_USER=${exist_user}",
-      'WRAPPER_UNATTENDED=1',
-      'WRAPPER_USE_SYSTEMD=1',
-    ],
-    timeout     => 0,
-    user        => 'root',
-    refreshonly => true,
-    subscribe   => Exec['sign eXist jar files'],
+  file { '/etc/systemd/system/existdb.service':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => epp('existdb/existdb.service.epp', {
+      home  => $exist_home,
+      user  => $exist_user,
+      group => $exist_group,
+    })
   }
 
-  service { 'eXist-db':
+  service { 'existdb':
     ensure    => running,
     subscribe => [
-      Exec['install eXist'],
+      File['/etc/systemd/system/existdb.service'],
     ],
     require   => [
       Exec['build eXist'],

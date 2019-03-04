@@ -1,0 +1,24 @@
+<%- |
+String $home,
+String $user,
+String $group,
+| -%>
+[Unit]
+Description=The exist db application server
+After=network.target
+
+[Service]
+Environment="EXIST_HOME=<%= $home %>"
+WorkingDirectory=<%= $home %>
+User=<%= $user %>
+Group=<%= $group %>
+ExecStart=/usr/bin/java \
+-Dexist.home=<%= $home %> \
+-Djetty.home=<%= $home %>/tools/jetty \
+-Dfile.encoding=UTF-8 \
+-Djava.endorsed.dirs=<%= $home %>/lib/endorsed \
+-Djava.awt.headless=true \
+-jar start.jar jetty
+
+[Install]
+WantedBy=multi-user.targetantedBy=multi-user.target
