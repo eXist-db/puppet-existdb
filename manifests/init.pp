@@ -123,22 +123,22 @@ class existdb (
     ]
   }
 
-  file { '/etc/systemd/system/existdb.service':
+  file { '/etc/systemd/system/eXist-db.service':
     ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => epp('existdb/existdb.service.epp', {
+    content => epp('existdb/eXist-db.service.epp', {
       home  => $exist_home,
       user  => $exist_user,
       group => $exist_group,
     })
   }
 
-  service { 'existdb':
+  service { 'eXist-db':
     ensure    => running,
     subscribe => [
-      File['/etc/systemd/system/existdb.service'],
+      File['/etc/systemd/system/eXist-db.service'],
     ],
     require   => [
       Exec['build eXist'],
