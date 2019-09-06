@@ -2,8 +2,10 @@
 define existdb::reverseproxy::server (
   $server_name = $title,
   $server_cert_name = $server_name,
-  $ssl_cert = "/etc/pki/tls/certs/${server_cert_name}.crt",
-  $ssl_key = "/etc/pki/tls/private/${server_cert_name}.key",
+  $ssl_cert_path = "/etc/pki/tls/certs/${server_cert_name}.crt",
+  $ssl_cert = undef,
+  $ssl_key_path = "/etc/pki/tls/private/${server_cert_name}.key",
+  $ssl_key = undef,
   $uri_path = '',
   $location_cfg_append = undef,
   $location_custom_cfg_append = undef,
@@ -23,8 +25,8 @@ define existdb::reverseproxy::server (
     proxy_redirect             => $proxy_redirect,
     ssl                        => true,
     ssl_redirect               => true,
-    ssl_cert                   => $ssl_cert,
-    ssl_key                    => $ssl_key,
+    ssl_cert                   => $ssl_cert_path,
+    ssl_key                    => $ssl_key_path,
     proxy_set_header           => [
       'Host $host',
       'X-Real-IP $remote_addr',
@@ -37,5 +39,25 @@ define existdb::reverseproxy::server (
     location_cfg_append        => $location_cfg_append,
     location_custom_cfg_append => $location_custom_cfg_append,
     raw_append                 => $raw_append,
+  }
+
+  if $ssl_cert {
+    file { $ssl_cert_path:
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => $ssl_cert,
+    }
+  }
+
+  if $ssl_key {
+    file { $ssl_key_path:
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => $ssl_key,
+    }
   }
 }
