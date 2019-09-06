@@ -34,8 +34,9 @@ class existdb (
 
   archive { '/tmp/exist.tar.bz2':
     ensure       => present,
-    source       => @("SOURCE"),
-      https://bintray.com/existdb/releases/exist/${exist_version}/view
+    source       => @("SOURCE"/L),
+      https://bintray.com/existdb/releases/download_file\
+      ?file_path=exist-distribution-${exist_version}-unix.tar.bz2
       |-SOURCE
     extract      => true,
     extract_path => '/usr/local',
