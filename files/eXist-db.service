@@ -6,6 +6,7 @@ After=syslog.target
 Type=simple
 User=existdb
 Group=existdb
+Environment=JAVA_OPTS=-Xmx2g
 ExecStart=/usr/local/existdb/bin/startup.sh
 Restart=on-abort
 
