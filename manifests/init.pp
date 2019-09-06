@@ -55,8 +55,8 @@ class existdb (
 
   augeas { 'eXist conf.xml':
     lens    => 'Xml.lns',
-    incl    => "${exist_home}/conf.xml",
-    context => "/files${exist_home}/conf.xml/",
+    incl    => "${exist_home}/etc/conf.xml",
+    context => "/files${exist_home}/etc/conf.xml/",
     changes => [
       "set exist/db-connection/#attribute/files ${exist_data}",
       "set exist/db-connection/#attribute/cacheSize ${exist_cache_size}",
