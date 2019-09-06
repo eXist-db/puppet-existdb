@@ -9,7 +9,7 @@ class existdb (
   $exist_user                  = 'existdb',
   $exist_group                 = 'existdb',
 ) {
-  $exist_version = regsubst($exist_revision, '^eXist-')
+  $exist_version = regsubst($exist_revision, '^eXist-', '')
 
   group { $exist_group:
     ensure => present,
