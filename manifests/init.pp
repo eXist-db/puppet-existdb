@@ -34,6 +34,9 @@ class existdb (
 
   archive { '/tmp/exist.tar.bz2':
     ensure           => present,
+    creates          => @("CREATES"),
+      /usr/local/exist-distribution-${exist_version}/etc/conf.xml
+      |-CREATES
     source           => @("SOURCE"/L),
       https://bintray.com/existdb/releases/download_file\
       ?file_path=exist-distribution-${exist_version}-unix.tar.bz2
