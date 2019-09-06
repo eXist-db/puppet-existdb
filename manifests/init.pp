@@ -33,14 +33,17 @@ class existdb (
   }
 
   archive { '/tmp/exist.tar.bz2':
-    ensure       => present,
-    source       => @("SOURCE"/L),
+    ensure           => present,
+    source           => @("SOURCE"/L),
       https://bintray.com/existdb/releases/download_file\
       ?file_path=exist-distribution-${exist_version}-unix.tar.bz2
       |-SOURCE
-    extract      => true,
-    extract_path => '/usr/local',
-    cleanup      => true,
+    download_options => '--location',
+    extract          => true,
+    extract_path     => '/usr/local',
+    user             => 'root',
+    group            => 'root',
+    cleanup          => true,
   }
 
   file { $exist_home:
