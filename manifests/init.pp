@@ -9,6 +9,8 @@ class existdb (
   $exist_user                  = 'existdb',
   $exist_group                 = 'existdb',
 ) {
+  $exist_version = regsubst($exist_revision, '^eXist-')
+
   group { $exist_group:
     ensure => present,
     system => true,
@@ -30,52 +32,22 @@ class existdb (
     mode   => '0700',
   }
 
-  vcsrepo { $exist_home:
-    ensure   => present,
-    provider => git,
-    owner    => $exist_user,
-    group    => $exist_group,
-    source   => 'https://github.com/eXist-db/exist.git',
-    revision => $exist_revision,
+  archive { '/tmp/exist.tar.bz2':
+    ensure       => present,
+    source       => @(SOURCE/L),
+      https://bintray.com/existdb/releases/exist/${exist_version}/view
+      |-SOURCE
+    extract      => true,
+    extract_path => '/usr/local',
+    cleanup      => true,
   }
 
-  file { "${exist_home}/extensions/local.build.properties":
-    ensure  => present,
-    source  => 'puppet:///modules/existdb/local.build.properties',
-    require => Vcsrepo[$exist_home],
+  file { $exist_home:
+    ensure => link,
+    target => "/usr/local/exist-distribution-${exist_version}",
   }
 
   include java
-
-  exec { 'build eXist':
-    cwd         => $exist_home,
-    command     => "${exist_home}/build.sh",
-    environment => [
-      "JAVA_HOME=${java_home}",
-    ],
-    timeout     => 0,
-    user        => $exist_user,
-    group       => $exist_group,
-    refreshonly => true,
-    subscribe   => Vcsrepo[$exist_home],
-    require     => [
-      File["${exist_home}/extensions/local.build.properties"],
-      Class['java'],
-    ],
-  }
-
-  exec { 'sign eXist jar files':
-    cwd         => $exist_home,
-    command     => "${exist_home}/build.sh -f build/scripts/jarsigner.xml -propertyfile build.properties",
-    environment => [
-      "JAVA_HOME=${java_home}",
-    ],
-    timeout     => 0,
-    user        => $exist_user,
-    group       => $exist_group,
-    refreshonly => true,
-    subscribe   => Exec['build eXist'],
-  }
 
   augeas { 'eXist conf.xml':
     lens    => 'Xml.lns',
@@ -118,35 +90,12 @@ class existdb (
       'set exist/xquery/builtin-modules/module[#attribute/uri = "http://exist-db.org/xquery/xslfo"]/parameter/#attribute/value org.exist.xquery.modules.xslfo.ApacheFopProcessorAdapter',
     ],
     require => [
-      Exec['sign eXist jar files'],
-      File[$exist_data],
     ]
   }
 
-  exec { 'install eXist':
-    cwd         => $exist_home,
-    command     => "/bin/yes | ${exist_home}/tools/yajsw/bin/installDaemon.sh",
-    environment => [
-      "JAVA_HOME=${java_home}",
-      "EXIST_HOME=${exist_home}",
-      "RUN_AS_USER=${exist_user}",
-      'WRAPPER_UNATTENDED=1',
-      'WRAPPER_USE_SYSTEMD=1',
-    ],
-    timeout     => 0,
-    user        => 'root',
-    refreshonly => true,
-    subscribe   => Exec['sign eXist jar files'],
-  }
-
   service { 'eXist-db':
-    ensure    => running,
-    subscribe => [
-      Exec['install eXist'],
-    ],
-    require   => [
-      Exec['build eXist'],
-      Augeas['eXist conf.xml'],
+    ensure  => running,
+    require => [
     ],
   }
 }
