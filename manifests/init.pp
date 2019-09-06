@@ -108,13 +108,13 @@ class existdb (
     group  => 'root',
     mode   => '0644',
     source => 'puppet:///modules/existdb/eXist-db.service',
+    notify => Service['eXist-db'],
   }
 
   service { 'eXist-db':
     ensure  => running,
     enable  => true,
     require => [
-      File['/etc/systemd/system/eXist-db.service'],
       File[$exist_home],
       File[$exist_data],
       User[$exist_user],
