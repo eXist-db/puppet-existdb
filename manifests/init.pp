@@ -50,8 +50,9 @@ class existdb (
   }
 
   file { $exist_home:
-    ensure => link,
-    target => "/usr/local/exist-distribution-${exist_version}",
+    ensure  => link,
+    target  => "/usr/local/exist-distribution-${exist_version}",
+    require => Archive['/tmp/exist.tar.bz2'],
   }
 
   include java
@@ -97,12 +98,26 @@ class existdb (
       'set exist/xquery/builtin-modules/module[#attribute/uri = "http://exist-db.org/xquery/xslfo"]/parameter/#attribute/value org.exist.xquery.modules.xslfo.ApacheFopProcessorAdapter',
     ],
     require => [
+      File[$exist_home],
     ]
+  }
+
+  file { '/etc/systemd/system/eXist-db.service':
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/existdb/eXist-db.service',
   }
 
   service { 'eXist-db':
     ensure  => running,
+    enable  => true,
     require => [
+      File['/etc/systemd/system/eXist-db.service'],
+      File[$exist_home],
+      File[$exist_data],
+      User[$exist_user],
     ],
   }
 }

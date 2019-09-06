@@ -1,0 +1,13 @@
+[Unit]
+Description=eXist-db NoSQL Database
+After=syslog.target
+
+[Service]
+Type=simple
+User=existdb
+Group=existdb
+ExecStart=/usr/local/existdb/bin/startup.sh
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
