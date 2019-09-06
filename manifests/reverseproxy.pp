@@ -7,8 +7,8 @@ class existdb::reverseproxy (
 
   augeas { 'eXist jetty-http.xml':
     lens    => 'Xml.lns',
-    incl    => "${exist_home}/tools/jetty/etc/jetty-http.xml",
-    context => "/files${exist_home}/tools/jetty/etc/jetty-http.xml/",
+    incl    => "${exist_home}/etc/jetty/jetty-http.xml",
+    context => "/files${exist_home}/etc/jetty/jetty-http.xml/",
     changes => [
       'ins New before Configure/Call[#attribute/name = "addConnector"]',
       'set Configure/New/#attribute/id httpConfig',
