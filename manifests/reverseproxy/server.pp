@@ -48,6 +48,7 @@ define existdb::reverseproxy::server (
       group   => 'root',
       mode    => '0644',
       content => $ssl_cert,
+      notify  => Nginx::Resource::Service[$server_name],
     }
   }
 
@@ -58,6 +59,7 @@ define existdb::reverseproxy::server (
       group   => 'root',
       mode    => '0644',
       content => $ssl_key,
+      notify  => Nginx::Resource::Service[$server_name],
     }
   }
 }
