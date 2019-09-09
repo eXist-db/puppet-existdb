@@ -43,10 +43,17 @@ class existdb (
     download_options => '--location',
     extract          => true,
     extract_path     => '/usr/local',
-    user             => $exist_user,
-    group            => $exist_group,
+    user             => 'root',
+    group            => 'root',
     cleanup          => true,
     require          => User[$exist_user],
+  }
+
+  file { "/usr/local/exist-distribution-${exist_version}":
+    ensure  => directory,
+    owner   => $exist_user,
+    group   => $exist_group,
+    recurse => true,
   }
 
   file { $exist_home:
