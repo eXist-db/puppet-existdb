@@ -42,7 +42,7 @@ class existdb (
       |-SOURCE
     download_options => '--location',
     extract          => true,
-    extractG_path     => '/usr/local',
+    extract_path     => '/usr/local',
     user             => 'root',
     group            => 'root',
     cleanup          => true,
