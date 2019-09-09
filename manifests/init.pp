@@ -42,7 +42,7 @@ class existdb (
       |-SOURCE
     download_options => '--location',
     extract          => true,
-    extract_path     => '/usr/local',
+    extractG_path     => '/usr/local',
     user             => 'root',
     group            => 'root',
     cleanup          => true,
@@ -54,6 +54,7 @@ class existdb (
     owner   => $exist_user,
     group   => $exist_group,
     recurse => true,
+    require => Archive['/tmp/exist.tar.bz2'],
   }
 
   file { $exist_home:
@@ -122,6 +123,7 @@ class existdb (
     ensure  => running,
     enable  => true,
     require => [
+      File["/usr/local/exist-distribution-${exist_version}"],
       File[$exist_home],
       File[$exist_data],
       User[$exist_user],
