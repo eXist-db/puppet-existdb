@@ -43,9 +43,10 @@ class existdb (
     download_options => '--location',
     extract          => true,
     extract_path     => '/usr/local',
-    user             => 'root',
-    group            => 'root',
+    user             => $exist_user,
+    group            => $exist_group,
     cleanup          => true,
+    require          => User[$exist_user],
   }
 
   file { $exist_home:
