@@ -4,7 +4,7 @@ class existdb (
   $exist_data                  = '/var/lib/existdb',
   $exist_cache_size            = '128M',
   $exist_collection_cache_size = '24M',
-  $exist_revision              = 'eXist-5.1.0',
+  $exist_revision              = 'eXist-5.1.1',
   $exist_version               = regsubst($exist_revision, '^eXist-', ''),
   $java_home                   = '/usr/lib/jvm/jre',
   $exist_user                  = 'existdb',
