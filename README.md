@@ -24,7 +24,7 @@ mod 'puppetlabs-stdlib','4.25.1'
 mod 'puppetlabs-java', '2.1.0'
 mod 'puppet-archive', '3.0.0'
 mod 'puppet-nginx','0.15.0'
-mod 'jonhallettuob-existdb', '0.3.4'
+mod 'jonhallettuob-existdb', '0.3.5'
 ```
 
 To install eXistdb and start it as a service with default parameters:
@@ -78,8 +78,8 @@ class existdb (
   $exist_data                  = '/var/lib/existdb',
   $exist_cache_size            = '128M',
   $exist_collection_cache_size = '24M',
-  $exist_revision              = 'eXist-5.1.1',
-  $exist_version               = '5.1.1',
+  $exist_revision              = 'eXist-5.2.0',
+  $exist_version               = '5.2.0',
   $java_home                   = '/usr/lib/jvm/jre',
   $exist_user                  = 'existdb',
   $exist_group                 = 'existdb',
