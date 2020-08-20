@@ -10,6 +10,7 @@ define existdb::reverseproxy::server (
   $location_cfg_append = undef,
   $location_custom_cfg_append = undef,
   $raw_append = undef,
+  $format_log = 'combined',
 ) {
   include nginx
 
@@ -38,6 +39,7 @@ define existdb::reverseproxy::server (
     require                    => Class['existdb'],
     location_cfg_append        => $location_cfg_append,
     location_custom_cfg_append => $location_custom_cfg_append,
+    format_log                 => $format_log,
     raw_append                 => $raw_append,
   }
 
