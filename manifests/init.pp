@@ -37,8 +37,8 @@ class existdb (
       /usr/local/exist-distribution-${exist_version}/etc/conf.xml
       |-CREATES
     source           => @("SOURCE"/L),
-      https://bintray.com/existdb/releases/download_file\
-      ?file_path=exist-distribution-${exist_version}-unix.tar.bz2
+      https://github.com/eXist-db/exist/releases/download/eXist-\
+      ${exist_version}/exist-distribution-${exist_version}-unix.tar.bz2
       |-SOURCE
     download_options => '--location',
     extract          => true,
