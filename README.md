@@ -113,4 +113,4 @@ define existdb::reverseproxy::server {
 
 ## Limitations
 
-The module was developed on CentOS 7 using Puppet 4 and hasn't been tested on any other systems.
+The module was developed on CentOS 7 using Puppet 6 and hasn't been tested on any other systems.
