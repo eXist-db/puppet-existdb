@@ -9,6 +9,8 @@ class existdb (
   $java_home                   = '/usr/lib/jvm/jre',
   $exist_user                  = 'existdb',
   $exist_group                 = 'existdb',
+  $proxy_server                = undef ,
+  $proxy_type                  = undef ,
 ) {
   group { $exist_group:
     ensure => present,
@@ -47,6 +49,8 @@ class existdb (
     group            => 'root',
     cleanup          => true,
     require          => User[$exist_user],
+    proxy_server     => $proxy_server,
+    proxy_type       => $proxy_type,
   }
 
   file { "/usr/local/exist-distribution-${exist_version}":
